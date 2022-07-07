@@ -6,13 +6,6 @@ services:
     volumes:
       - {{ ssl_cert_file }}:/etc/ssl/certs/ca-certificates.crt
       - {{ localtime_file }}:/etc/localtime
-      #- {{ config_dir }}/grafana.ini:/etc/grafana/grafana.ini
-      #- {{ data_dir }}:/var/lib/grafana
-    # environment:
-    #   - LETS_ENCRYPT_ENABLED=false
-    #   - PUBLIC_DNS={{ drawio_host }}
-    #   - ORGANISATION_UNIT=
-    #   - KEYSTORE_PASS=
     deploy:
       labels:
         - traefik.enable=true
