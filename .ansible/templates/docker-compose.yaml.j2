@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+
+  webapp:
+    image: jgraph/drawio:20.0.4
+    volumes:
+      - {{ ssl_cert_file }}:/etc/ssl/certs/ca-certificates.crt
+      - {{ localtime_file }}:/etc/localtime
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.http.services.{{ repository }}.loadbalancer.server.port=8080
+        - traefik.http.routers.{{ repository }}.rule=Host(`{{ drawio_host }}`)
+        - traefik.http.routers.{{ repository }}.tls.certresolver=step-ca
+        - traefik.http.routers.{{ repository }}.service={{ repository }}
+    networks:
+      - {{ traefik_network }}
+
+networks:
+  {{ traefik_network }}:
+    external: true
+    name: {{ traefik_network }}

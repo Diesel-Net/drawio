@@ -1,0 +1,12 @@
+all:
+  children:
+
+    manager:
+      hosts:
+        # drawio.diesel.net
+        tools.diesel.net:
+
+  vars:
+    drawio_host: drawio.diesel.net
+    ansible_user: automation
+    ansible_python_interpreter: /usr/bin/python3

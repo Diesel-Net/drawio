@@ -1,0 +1,18 @@
+- hosts: manager
+  roles:
+    - common
+    - traefik
+  tasks:
+
+    - include_role:
+        name: docker
+        tasks_from: stack_deploy
+      vars:
+        docker_compose_template: docker-compose.yaml.j2
+
+    - include_role:
+        name: docker
+        tasks_from: service_update
+      vars:
+        options: --force
+        docker_service: webapp
